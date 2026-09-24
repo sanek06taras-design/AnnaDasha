@@ -1,47 +1,57 @@
 # Технические спецификации проекта
+### Информационная архитектура книжного интернет-магазина
+
 ```mermaid
 graph TD
-    %% Определение пользователей (Акторов)
-    Guest((Гость))
-    Client((Авторизованный клиент))
-    Admin((Администратор))
+    %% Главная страница
+    Main[Главная страница]
+    
+    %% Второй уровень страниц
+    Catalog[Каталог книг]
+    Profile[Личный кабинет]
+    Cart[Корзина]
+    Auth[Вход / Регистрация]
+    AdminPanel[Панель администратора]
+    
+    %% Связи второго уровня
+    Main --> Catalog
+    Main --> Profile
+    Main --> Cart
+    Main --> Auth
+    Main --> AdminPanel
 
-    %% Наследование ролей
-    Client --> Guest
+    %% Третий уровень: Каталог и Жанры
+    Genre1[Художественная литература]
+    Genre2[Научпоп и Бизнес]
+    Genre3[Детские книги]
+    BookCard[Карточка конкретной книги]
 
-    %% Прецеденты для Гостя
-    subgraph Каталог и Авторизация
-        UC_Browse[Просмотр каталога и карточек книг]
-        UC_Search[Поиск и фильтрация книг]
-        UC_Auth[Регистрация и Вход в систему]
-    end
+    Catalog --> Genre1
+    Catalog --> Genre2
+    Catalog --> Genre3
+    
+    Genre1 --> BookCard
+    Genre2 --> BookCard
+    Genre3 --> BookCard
 
-    %% Прецеденты для Клиента
-    subgraph Личный кабинет и Покупки
-        UC_Profile[Управление профилем]
-        UC_Cart[Управление корзиной и избранным]
-        UC_Order[Оформление и оплата заказа]
-        UC_Review[Оставление отзывов и оценок]
-    end
+    %% Третий уровень: Личный кабинет
+    Orders[История заказов]
+    Settings[Настройки профиля]
+    Favorites[Избранное / Закладки]
 
-    %% Прецеденты для Админа
-    subgraph Панель управления Админка
-        UC_ManageCatalog[Управление каталогом товаров]
-        UC_ManageOrders[Управление заказами и статусами]
-        UC_Moderate[Модерация отзывов]
-    end
+    Profile --> Orders
+    Profile --> Settings
+    Profile --> Favorites
 
-    %% Связи Акторов с прецедентами
-    Guest --- UC_Browse
-    Guest --- UC_Search
-    Guest --- UC_Auth
+    %% Третий уровень: Корзина
+    Checkout[Оформление заказа и оплата]
+    
+    Cart --> Checkout
 
-    Client --- UC_Profile
-    Client --- UC_Cart
-    Client --- UC_Order
-    Client --- UC_Review
+    %% Третий уровень: Админка
+    ManageBooks[Управление товарами]
+    ManageOrders[Управление заказами]
 
-    Admin --- UC_ManageCatalog
-    Admin --- UC_ManageOrders
-    Admin --- UC_Moderate
+    AdminPanel --> ManageBooks
+    AdminPanel --> ManageOrders
 ```
