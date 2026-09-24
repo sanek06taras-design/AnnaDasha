@@ -1,7 +1,4 @@
 # Технические спецификации проекта
-### UML-диаграмма прецедентов (Use Case)
-
-```mermaid
 graph TD
     %% Определение пользователей (Акторов)
     Guest((Гость))
@@ -27,7 +24,7 @@ graph TD
     end
 
     %% Прецеденты для Админа
-    subgraph Панель управления (Админка)
+    subgraph Панель управления Админка
         UC_ManageCatalog[Управление каталогом товаров]
         UC_ManageOrders[Управление заказами и статусами]
         UC_Moderate[Модерация отзывов]
@@ -46,4 +43,3 @@ graph TD
     Admin --- UC_ManageCatalog
     Admin --- UC_ManageOrders
     Admin --- UC_Moderate
-```
