@@ -1,4 +1,5 @@
 # Технические спецификации проекта
+```mermaid
 graph TD
     %% Определение пользователей (Акторов)
     Guest((Гость))
@@ -43,3 +44,4 @@ graph TD
     Admin --- UC_ManageCatalog
     Admin --- UC_ManageOrders
     Admin --- UC_Moderate
+```
